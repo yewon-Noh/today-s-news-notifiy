@@ -1,8 +1,11 @@
 package news.today.notification.search.service;
 
+import news.today.notification.model.News;
 import news.today.notification.search.Driver;
 import news.today.notification.search.SearchService;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class SearchServiceImpl implements SearchService {
@@ -14,8 +17,7 @@ public class SearchServiceImpl implements SearchService {
     }
 
     @Override
-    public String getNewsByTheme(String category) {
-        driver.searchNews(category);
-        return null;
+    public List<News> getNewsByTheme(String category) {
+        return driver.searchNews(category);
     }
 }
