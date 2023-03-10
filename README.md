@@ -2,5 +2,5 @@
 
 ## local
 
-- Chrome version 110.0.5481.178
-   - Driver 설치 [[link](https://chromedriver.storage.googleapis.com/index.html?path=110.0.5481.77/)]
+- Chrome version 111.0.5563.64
+   - Driver 설치 [[link](https://chromedriver.storage.googleapis.com/index.html?path=111.0.5563.64/)]
