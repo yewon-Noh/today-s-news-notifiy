@@ -34,9 +34,8 @@ public class Driver {
 
     /**
      * Chrome Driver 세팅
-     * @return
      */
-    public WebDriver setDriver() {
+    public void setDriver() {
         Path path = Paths.get(chromeDriver);
         System.setProperty("webdriver.chrome.driver", path.toString());
 
@@ -48,14 +47,13 @@ public class Driver {
         options.addArguments("--blink-settings=imagesEnabled=false");   // 이미지 다운 안받음
         options.addArguments("--remote-allow-origins=*");
 
-        WebDriver driver = new ChromeDriver(options);
-        return driver;
+        driver = new ChromeDriver(options);
+        webDriverWait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
     @PostConstruct
     public void init() {
-        driver = setDriver();
-        webDriverWait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        setDriver();
     }
 
     @PreDestroy
@@ -101,7 +99,6 @@ public class Driver {
                 );
             }
         }
-
         return newsList;
     }
 }
