@@ -14,7 +14,7 @@ public enum Category {
     SOCIETY( 2, "society","사회"),
     ECONOMY(3, "economy", "경제"),
     INTERNATIONAL( 4, "international","국제"),
-    IT(5, "it", "IT/과학");
+    IT(8, "it", "IT/과학");
 
     private static final Map<String, String> CODE_MAP = Collections.unmodifiableMap(
             Stream.of(values()).collect(Collectors.toMap(Category::getEng, Category::name))
