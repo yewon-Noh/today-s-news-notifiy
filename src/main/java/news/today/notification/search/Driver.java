@@ -1,5 +1,7 @@
 package news.today.notification.search;
 
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
 import news.today.notification.model.Category;
 import news.today.notification.model.News;
 import org.openqa.selenium.By;
@@ -27,6 +29,9 @@ public class Driver {
     @Value("${zum.site.url}")
     private String zumUrl;
 
+    private WebDriver driver;
+    private WebDriverWait webDriverWait;
+
     /**
      * Chrome Driver 세팅
      * @return
@@ -47,15 +52,23 @@ public class Driver {
         return driver;
     }
 
+    @PostConstruct
+    public void init() {
+        driver = setDriver();
+        webDriverWait = new WebDriverWait(driver, Duration.ofSeconds(10));
+    }
+
+    @PreDestroy
+    public void destroy() {
+        driver.quit();
+    }
+
     /**
      * 카테고리 별 뉴스 데이터 수집
      * @param category
      * @return
      */
     public List<News> searchNews(String category) {
-        WebDriver driver = setDriver();
-        WebDriverWait webDriverWait = new WebDriverWait(driver, Duration.ofSeconds(10));
-
         String newUrl = zumUrl;
         int categoryNum = Category.of(category).getNum();
         if (categoryNum < 10) newUrl += "0";
@@ -69,17 +82,13 @@ public class Driver {
         // 기사 수집
         List<News> newsList = new ArrayList<>();
 
-        String mainSelector = "#news_sec_main_wrap > div > section.section_top_news > div.main_slot";
-        String subSelector = "#news_sec_main_wrap > div > section.section_top_news > ul.sub_slots > li";
+        String selector = "#news_sec_main_wrap > div > section.section_top_news > div.main_slot, #news_sec_main_wrap > div > section.section_top_news > ul.sub_slots > li";
         String companySelector = "strong";
         String titleSelector = "a > h2";
         String urlSelector = "a";
         String contentSelector = "a > div.text";
 
-        List<WebElement> webElements = new ArrayList<>();
-        webElements.add(driver.findElement(By.cssSelector(mainSelector)));        // 메인 기사 수집
-        webElements.addAll(driver.findElements(By.cssSelector(subSelector)));     // 서브 기사 수집
-
+        List<WebElement> webElements = driver.findElements(By.cssSelector(selector));
         if (webElements.size() > 0) {
             for (WebElement element: webElements) {
                 newsList.add(
@@ -93,7 +102,6 @@ public class Driver {
             }
         }
 
-        driver.quit();
         return newsList;
     }
 }
