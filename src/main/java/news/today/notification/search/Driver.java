@@ -41,6 +41,7 @@ public class Driver {
         options.addArguments("headless");   // 브라우저 안띄움
         options.addArguments("--disable-gpu");  // gpu 비활성화
         options.addArguments("--blink-settings=imagesEnabled=false");   // 이미지 다운 안받음
+        options.addArguments("--remote-allow-origins=*");
 
         WebDriver driver = new ChromeDriver(options);
         return driver;
