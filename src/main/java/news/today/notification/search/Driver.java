@@ -68,9 +68,9 @@ public class Driver {
      */
     public List<News> searchNews(String category) {
         String newUrl = zumUrl;
-        int categoryNum = Category.of(category).getNum();
-        if (categoryNum < 10) newUrl += "0";
-        newUrl += Integer.toString(categoryNum);
+        int id = Category.of(category).getId();
+        if (id < 10) newUrl += "0";
+        newUrl += Integer.toString(id);
 
         driver.get(newUrl);
         webDriverWait.until(
@@ -91,6 +91,7 @@ public class Driver {
             for (WebElement element: webElements) {
                 newsList.add(
                         News.builder()
+                                .category(Category.of(category).getKor())
                                 .company(element.findElement(By.cssSelector(companySelector)).getText())
                                 .title(element.findElement(By.cssSelector(titleSelector)).getText())
                                 .url(element.findElement(By.cssSelector(urlSelector)).getAttribute("href"))

@@ -21,7 +21,7 @@ public enum Category {
     );
 
     @Getter
-    private final int num;
+    private final int id;
     @Getter
     private final String eng;
     @Getter

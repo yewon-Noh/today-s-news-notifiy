@@ -8,6 +8,7 @@ import lombok.Getter;
 @AllArgsConstructor
 @Builder
 public class News {
+    private String category;
     private String company;
     private String title;
     private String url;

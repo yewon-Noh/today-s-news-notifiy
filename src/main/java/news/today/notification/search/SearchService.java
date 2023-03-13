@@ -7,4 +7,6 @@ import java.util.List;
 public interface SearchService {
 
     public List<News> getNewsByTheme(String category);
+
+    public List<News> getNews();
 }
