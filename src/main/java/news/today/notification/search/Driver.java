@@ -1,7 +1,5 @@
 package news.today.notification.search;
 
-import jakarta.annotation.PostConstruct;
-import jakarta.annotation.PreDestroy;
 import news.today.notification.model.Category;
 import news.today.notification.model.News;
 import org.openqa.selenium.By;
@@ -14,6 +12,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.Duration;
